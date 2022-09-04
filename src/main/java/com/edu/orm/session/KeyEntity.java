@@ -4,7 +4,7 @@ import com.edu.orm.session.util.EntityUtil;
 
 public record KeyEntity(Class<?> type, Object id) {
     public static <T> KeyEntity of(T entity) {
-        var idField = EntityUtil.getIdField(entity.getClass());
+        var idField = EntityUtil.getId(entity);
         return new KeyEntity(entity.getClass(), idField);
     }
 

@@ -10,6 +10,7 @@ import lombok.SneakyThrows;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Optional;
 
 public class EntityUtil {
@@ -67,5 +68,17 @@ public class EntityUtil {
         var idField = getIdField(type);
         idField.setAccessible(Boolean.TRUE);
         return idField.get(entity);
+    }
+
+    @SneakyThrows
+    public static Object retrieveValue(Field field, Object object) {
+        field.setAccessible(Boolean.TRUE);
+        return field.get(object);
+    }
+
+    public static <T> Field[] getSortedFields(Class<T> entity) {
+        return Arrays.stream(entity.getDeclaredFields())
+                .sorted(Comparator.comparing(Field::getName))
+                .toArray(Field[]::new);
     }
 }

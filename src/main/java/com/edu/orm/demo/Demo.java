@@ -21,8 +21,10 @@ public class Demo {
         System.out.println(person);
         System.out.println(note);
 
-        System.out.println(person.getNotes());
-
+       // System.out.println(person.getNotes());
+        note.setBody("new body");
+        System.out.println(session.findById(Note.class, 1L));
+        session.close();
     }
 
     @SneakyThrows
